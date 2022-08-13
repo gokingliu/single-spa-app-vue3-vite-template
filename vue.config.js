@@ -56,18 +56,9 @@ module.exports = {
       );
     }
     if (process.env.VUE_APP_ENV !== 'standalone') {
-      config.plugin('SystemJSPublicPathWebpackPlugin').use(SystemJSPublicPathWebpackPlugin, [
-        {
-          rootDirectoryLevel: 2,
-          systemjsModuleName: name,
-        },
-      ]);
-
-      config.plugin('StandaloneSingleSpaPlugin').use(StandaloneSingleSpaPlugin, [
-        {
-          appOrParcelName: name,
-        },
-      ]);
+      config.output.libraryTarget = 'umd';
+      config.plugins.push(new SystemJSPublicPathWebpackPlugin({ rootDirectoryLevel: 2, systemjsModuleName: name }));
+      config.plugins.push(new StandaloneSingleSpaPlugin({ appOrParcelName: name, disabled: true }));
     }
   },
   chainWebpack: (config) => {
@@ -81,6 +72,10 @@ module.exports = {
         args[0].terserOptions.output = { comments: false };
         return args;
       });
+    }
+    if (process.env.VUE_APP_ENV !== 'standalone') {
+      config.externals = ['single-spa'];
+      config.optimization.delete('splitChunks');
     }
   },
 };
