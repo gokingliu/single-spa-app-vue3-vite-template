@@ -1,0 +1,33 @@
+/* Element Chalk Variables */
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+
+/* Color
+-------------------------- */
+$colors: (
+  'white': #ffffff,
+  'black': #000000,
+  'primary': (
+    'base': #0052d9,
+  ),
+  'success': (
+    'base': #4ec282,
+  ),
+  'warning': (
+    'base': #fcc83d,
+  ),
+  'danger': (
+    'base': #f06d5d,
+  ),
+  'error': (
+    'base': #f06d5d,
+  ),
+  'info': (
+    'base':  rgba(0, 0, 0, 0.24),
+  ),
+),
+
+);
+
+:root {
+  --el-font-weight-primary: 400;
+}
