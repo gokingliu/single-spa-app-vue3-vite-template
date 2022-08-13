@@ -3,14 +3,19 @@ const IconsResolver = require('unplugin-icons/resolver');
 const AutoImport = require('unplugin-auto-import/webpack');
 const Components = require('unplugin-vue-components/webpack');
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
+const SystemJSPublicPathWebpackPlugin = require('systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin');
+const StandaloneSingleSpaPlugin = require('standalone-single-spa-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const GzipExtensions = ['js', 'html', 'css', 'svg', 'png'];
+const { name } = require('./package.json');
 
 module.exports = {
   filenameHashing: false,
   css: {
     loaderOptions: {
-      scss: { additionalData: '@use "src/assets/css/element-variables.scss" as *;' },
+      scss: {
+        additionalData: '@use "src/assets/css/element-variables.scss" as *;',
+      },
     },
   },
   configureWebpack: (config) => {
@@ -49,6 +54,20 @@ module.exports = {
           deleteOriginalAssets: false, // 是否删除原文件
         }),
       );
+    }
+    if (process.env.VUE_APP_ENV !== 'standalone') {
+      config.plugin('SystemJSPublicPathWebpackPlugin').use(SystemJSPublicPathWebpackPlugin, [
+        {
+          rootDirectoryLevel: 2,
+          systemjsModuleName: name,
+        },
+      ]);
+
+      config.plugin('StandaloneSingleSpaPlugin').use(StandaloneSingleSpaPlugin, [
+        {
+          appOrParcelName: name,
+        },
+      ]);
     }
   },
   chainWebpack: (config) => {

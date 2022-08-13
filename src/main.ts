@@ -9,8 +9,6 @@ import routerGuards from '@/router/routerGuards';
 import store from '@/store';
 import 'element-plus/theme-chalk/src/message.scss';
 
-console.log(process.env);
-
 // 路由配置
 const routerOptions: RouterOptions = {
   history: createWebHashHistory(''),
@@ -74,7 +72,7 @@ const singleSpaMode = () => {
 
 (async () => {
   try {
-    process.env.STANDALONE_SINGLE_SPA === 'true' ? await standaloneMode() : singleSpaMode();
+    process.env.VUE_APP_ENV === 'standalone' ? await standaloneMode() : singleSpaMode();
   } catch (e) {
     await standaloneMode();
   }
