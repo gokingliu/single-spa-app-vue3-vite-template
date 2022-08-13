@@ -5,14 +5,14 @@ const DEFAULT_ROUTERS: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'index',
-    component: () => import(/* webpackChunkName: "chunk-index" */ '@/pages/index.vue'),
+    component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/index.vue'),
     redirect: () => ({ path: '/add' }),
     children: [...MANAGE_ROUTERS],
   },
   {
     path: '/403/:authType',
     name: 'page-not-found',
-    component: () => import(/* webpackChunkName: "403" */ '@/pages/403.vue'),
+    component: () => import(/* webpackChunkName: "403" */ '@/views/403.vue'),
   },
 ];
 

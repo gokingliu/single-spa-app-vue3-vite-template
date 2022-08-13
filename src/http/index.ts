@@ -90,7 +90,7 @@ class HttpClient {
       e.message,
       '\n',
       '接口名:',
-      e.config.baseURL as string + e.config?.url,
+      (e.config.baseURL as string) + e.config?.url,
       '\n',
       '参数:',
       e.config.data,

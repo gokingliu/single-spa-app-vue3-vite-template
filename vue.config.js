@@ -10,7 +10,7 @@ module.exports = {
   filenameHashing: false,
   css: {
     loaderOptions: {
-      scss: { additionalData: `@use 'src/assets/css/element-variables.scss' as *;` },
+      scss: { additionalData: '@use "src/assets/css/element-variables.scss" as *;' },
     },
   },
   configureWebpack: (config) => {
@@ -23,7 +23,7 @@ module.exports = {
           // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
           ElementPlusResolver(),
           // 自动导入图标组件
-          IconsResolver({ prefix: 'Icon' })
+          IconsResolver({ prefix: 'Icon' }),
         ],
         dts: 'auto-imports.d.ts',
       }),
@@ -52,7 +52,6 @@ module.exports = {
     }
   },
   chainWebpack: (config) => {
-    config.optimization.delete("splitChunks");
     // 非入口文件名添加 hash 值
     config.output.chunkFilename('js/[name].[chunkhash].js').end();
     // 清空生产环境控制台日志 (保留 console.error)

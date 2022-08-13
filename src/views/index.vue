@@ -2,10 +2,7 @@
   <el-container class="index">
     <!-- 顶栏 -->
     <el-header class="index__header">
-      <el-menu>
-        <el-menu-item>添加</el-menu-item>
-        <el-menu-item>查询</el-menu-item>
-      </el-menu>
+      <BaseMenu />
     </el-header>
 
     <!-- 内容区域 -->
@@ -15,8 +12,14 @@
   </el-container>
 </template>
 
-<script>
-export default { name: 'ViewsIndex' };
+<script lang="ts">
+import { defineComponent } from 'vue';
+import BaseMenu from '@/components/base-menu/index.vue';
+
+export default defineComponent({
+  name: 'ViewsIndex',
+  components: { BaseMenu },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -24,7 +27,8 @@ export default { name: 'ViewsIndex' };
   height: 100vh;
 
   &__header {
-    height: 50px;
+    height: 60px;
+    padding: 0;
   }
 
   &__main {

@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 const MANAGE_ROUTERS: RouteRecordRaw[] = [
   {
     path: '/add',
-    component: () => import(/* webpackChunkName: "chunk-view" */ '@/pages/views-router.vue'),
+    component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/keep-view.vue'),
     meta: {
       pageName: '添加',
     },
@@ -11,18 +11,18 @@ const MANAGE_ROUTERS: RouteRecordRaw[] = [
       {
         path: '403/:authType',
         name: 'add-page-not-found',
-        component: () => import(/* webpackChunkName: "403" */ '@/pages/403.vue'),
+        component: () => import(/* webpackChunkName: "403" */ '@/views/403.vue'),
       },
       {
         path: '',
         name: 'add',
-        component: () => import(/* webpackChunkName: "add" */ '@/pages/add/index.vue'),
+        component: () => import(/* webpackChunkName: "add" */ '@/views/add/index.vue'),
       },
     ],
   },
   {
     path: '/search',
-    component: () => import(/* webpackChunkName: "chunk-view" */ '@/pages/views-router.vue'),
+    component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/keep-view.vue'),
     meta: {
       pageName: '查询',
     },
@@ -30,12 +30,12 @@ const MANAGE_ROUTERS: RouteRecordRaw[] = [
       {
         path: '403/:authType',
         name: 'search-page-not-found',
-        component: () => import(/* webpackChunkName: "403" */ '@/pages/403.vue'),
+        component: () => import(/* webpackChunkName: "403" */ '@/views/403.vue'),
       },
       {
         path: '',
         name: 'search',
-        component: () => import(/* webpackChunkName: "search" */ '@/pages/search/index.vue'),
+        component: () => import(/* webpackChunkName: "search" */ '@/views/search/index.vue'),
       },
     ],
   },
