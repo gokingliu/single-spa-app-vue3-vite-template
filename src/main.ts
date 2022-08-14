@@ -69,7 +69,7 @@ const singleSpaMode = () => {
   try {
     process.env.VUE_APP_ENV === 'standalone' ? await standaloneMode() : singleSpaMode();
   } catch (e) {
-    await standaloneMode();
+    import.meta.env.VITE_APP_ENV === 'standalone' ? await standaloneMode() : singleSpaMode();
   }
 })();
 
