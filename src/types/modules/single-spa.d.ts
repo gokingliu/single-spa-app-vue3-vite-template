@@ -1,11 +1,11 @@
-import { UserAuthItem } from './store';
+import { ResponseUserAuth } from './store';
 
 export interface SingleSpaProps {
   name: string;
   mountParcel: Function;
-  parcelProps: parcelProps;
+  parcelProps: ParcelProps;
 }
 
 export interface ParcelProps {
-  userAuth: UserAuthItem | null | undefined;
+  userAuth: ResponseUserAuth | null | undefined;
 }

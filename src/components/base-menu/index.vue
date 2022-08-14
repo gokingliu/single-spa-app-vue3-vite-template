@@ -5,7 +5,7 @@
     text-color="#fff"
     active-text-color="#ffd04b"
     mode="horizontal"
-    router
+    @select="routeChange"
   >
     <el-menu-item index="add">添加</el-menu-item>
     <el-menu-item index="search">查询</el-menu-item>
@@ -13,17 +13,25 @@
 </template>
 
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 /**
  * VUE 全家桶
  */
-const router = useRoute();
+const route = useRoute();
+const router = useRouter();
 
 /**
  * 默认激活菜单
  */
-const activeRoute = router.name;
+const activeRoute = (route.name as string).split('-no-permission').shift();
+
+/**
+ * 菜单切换
+ */
+const routeChange = (value: string) => {
+  router.push({ name: value });
+};
 </script>
 
 <script lang="ts">

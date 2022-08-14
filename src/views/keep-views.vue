@@ -13,5 +13,5 @@ const includeRouter = ref([]);
 </script>
 
 <script lang="ts">
-export default { name: 'KeepView' };
+export default { name: 'KeepViews' };
 </script>

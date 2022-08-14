@@ -14,7 +14,6 @@ const routerOptions: RouterOptions = {
   history: createWebHashHistory(''),
   routes,
 };
-
 // 创建路由
 const router: Router = createRouter(routerOptions);
 
@@ -22,10 +21,7 @@ const router: Router = createRouter(routerOptions);
 const standaloneMode = async () => {
   // 实例化 app
   const app = createApp(App);
-
-  // 全局插件注册
-  [store, router].map((item) => app.use(item));
-
+  // 储存用户权限、设置路由守卫
   const setUserAuth = (userAuth: ResponseUserAuth | null | undefined) => {
     // 储存权限信息到 vuex
     store.commit('userStore/SET_USER_AUTH', userAuth);
@@ -35,15 +31,15 @@ const standaloneMode = async () => {
       routerGuards.beforeEach(to, from, next, userAuth);
     });
   };
-
   // 获取权限信息
   try {
     const response = await api.queryUserAuth();
     setUserAuth(response.result);
   } catch (e) {
-    setUserAuth({ addAuth: true, searchAuth: true });
+    setUserAuth({ addAuth: true, searchAuth: false });
   }
-
+  // 全局插件注册
+  [store, router].map((item) => app.use(item));
   // 挂载 app
   app.mount('#app');
 };
@@ -56,20 +52,19 @@ const singleSpaMode = () => {
       render: () => h(App, {}),
     },
     handleInstance: (app: Application, props: SingleSpaProps) => {
-      // 全局插件注册
-      [store, router].map((item) => app.use(item));
-
       // 储存权限信息到 vuex
       store.commit('userStore/SET_USER_AUTH', props.parcelProps.userAuth);
-
       // 路由守卫
       router.beforeEach((to, from, next) => {
         routerGuards.beforeEach(to, from, next, props.parcelProps.userAuth);
       });
+      // 全局插件注册
+      [store, router].map((item) => app.use(item));
     },
   });
 };
 
+// webpack 运行或 vite 运行
 (async () => {
   try {
     process.env.VUE_APP_ENV === 'standalone' ? await standaloneMode() : singleSpaMode();

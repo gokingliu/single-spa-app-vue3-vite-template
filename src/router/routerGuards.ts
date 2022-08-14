@@ -57,13 +57,12 @@ class RouterGuards {
     next: NavigationGuardNext,
   ) => {
     const nextRouterWithAuth = (user = true) => {
-      // 有权限时，用户可能在 403 页面，需要进行跳转
-      const toName = String(to.name).split('-page-not-found').shift();
-      if (String(to.name) === 'page-not-found') {
+      const toName = String(to.name).split('-no-permission').shift();
+      if (String(to.name) === 'no-permission') {
         next('/');
       } else if (
-        String(to.name).includes('-page-not-found') &&
-        (user ? !noAuthRouterName.includes(`knowledge-${toName}`) : true)
+        String(to.name).includes('-no-permission') &&
+        (user ? !noAuthRouterName.includes(toName as string) : true)
       ) {
         const pathName = `/${toName}`;
         next(pathName);
@@ -74,18 +73,16 @@ class RouterGuards {
     };
 
     if (noAuthRouterName.length === Object.keys(this.routerNameAuthMap).length) {
-      // 无权限路由长度 等于 需要鉴权路由长度时，跳转 403 页面
       to.path === '/403/uiAllAuth' ? next() : next('/403/uiAllAuth');
     } else if (noAuthRouterName.includes(to.name as string)) {
       const pathName = to.path
         .split('/')
         .filter((x) => x)
-        .shift(); // 取 path 路径名
+        .shift();
       const parentPath = pathName ? `/${pathName}` : '';
       const fullPath = `${parentPath}/403/${this.routerNameAuthMap[to.name as string]}`;
       to.path.includes(`${parentPath}/403`) ? next() : next(fullPath);
     } else {
-      // 有权限时，用户可能在 403 页面，需要进行跳转
       nextRouterWithAuth();
     }
   };

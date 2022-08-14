@@ -11,7 +11,7 @@ const DEFAULT_ROUTERS: RouteRecordRaw[] = [
   },
   {
     path: '/403/:authType',
-    name: 'page-not-found',
+    name: 'no-permission',
     component: () => import(/* webpackChunkName: "403" */ '@/views/403.vue'),
   },
 ];

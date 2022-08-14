@@ -1,5 +1,5 @@
 <template>
-  <div class="page-not-found">
+  <div class="no-permission">
     <span>您暂无{{ authName }}权限，请前往 <a :href="toAuthPage" target="_blank">权限管理系统</a> 申请</span>
   </div>
 </template>
@@ -30,16 +30,20 @@ const toAuthPage = computed(() => 'https://xxx.com/permission/apply');
 </script>
 
 <script lang="ts">
-export default { name: 'PageNotFound' };
+export default { name: 'NoPermission' };
 </script>
 
 <style lang="scss" scoped>
-.page-not-found {
+.no-permission {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 20px;
   text-align: center;
 
   a {
     cursor: pointer;
-    font-size: 20px;
   }
 }
 </style>

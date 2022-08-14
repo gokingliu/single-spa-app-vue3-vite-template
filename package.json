@@ -1,5 +1,5 @@
 {
-  "name": "single-spa-app-vue3-template",
+  "name": "single-spa-app-vue3-vite-template",
   "version": "1.0.0",
   "private": true,
   "scripts": {

@@ -1,7 +1,9 @@
+import { ResponseUserAuth } from './store';
+
 export interface StoreState {
   userStore?: UserState;
 }
 
 export interface UserState {
-  userAuth: UserAuthItem | null;
+  userAuth: ResponseUserAuth | null | undefined;
 }

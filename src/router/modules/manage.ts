@@ -3,14 +3,14 @@ import { RouteRecordRaw } from 'vue-router';
 const MANAGE_ROUTERS: RouteRecordRaw[] = [
   {
     path: '/add',
-    component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/keep-view.vue'),
+    component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/keep-views.vue'),
     meta: {
       pageName: '添加',
     },
     children: [
       {
         path: '403/:authType',
-        name: 'add-page-not-found',
+        name: 'add-no-permission',
         component: () => import(/* webpackChunkName: "403" */ '@/views/403.vue'),
       },
       {
@@ -22,14 +22,14 @@ const MANAGE_ROUTERS: RouteRecordRaw[] = [
   },
   {
     path: '/search',
-    component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/keep-view.vue'),
+    component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/keep-views.vue'),
     meta: {
       pageName: '查询',
     },
     children: [
       {
         path: '403/:authType',
-        name: 'search-page-not-found',
+        name: 'search-no-permission',
         component: () => import(/* webpackChunkName: "403" */ '@/views/403.vue'),
       },
       {
