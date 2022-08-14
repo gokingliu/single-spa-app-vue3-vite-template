@@ -11,7 +11,7 @@ class HttpClient {
   // 取消请求
   sourceCancel: AxiosSourceCancelConfig = { token: undefined, cancel: null };
 
-  constructor(commonOption: Object, options: Object) {
+  constructor(commonOption: any, options: any) {
     this.commonOption = commonOption;
     this.axios = axios.create({
       timeout: 60000,

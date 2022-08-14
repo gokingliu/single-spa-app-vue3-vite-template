@@ -3,22 +3,19 @@ module.exports = {
   env: { node: true },
   parser: 'vue-eslint-parser',
   extends: [
-    'plugin:vue/vue3-essential',
     'prettier',
+    'plugin:vue/vue3-essential',
     '@tencent/eslint-config-tencent',
-    '@tencent/eslint-config-tencent/ts',
     '@tencent/eslint-config-tencent/prettier',
+    '@vue/typescript/recommended',
   ],
-  plugins: ['vue', '@typescript-eslint'],
+  plugins: ['vue'],
   parserOptions: {
-    parser: '@typescript-eslint/parser',
-    sourceType: 'module',
-    project: './tsconfig.json',
-    ecmaVersion: 2020,
-    extraFileExtensions: ['.vue'],
-    createDefaultProgram: true,
+    ecmaVersion: 'latest',
+    ecmaFeatures: { jsx: true },
   },
   rules: {
     'chalk/chalk': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 };

@@ -1,16 +1,16 @@
 <template>
   <div class="add">
     <el-icon><i-ep-DocumentAdd /></el-icon>
-    <span>添加页面</span>
+    <SpanText />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="tsx" setup>
+const SpanText = () => <span>添加页面</span>;
+</script>
 
-export default defineComponent({
-  name: 'ViewsAdd',
-});
+<script lang="tsx">
+export default { name: 'ViewsAdd' };
 </script>
 
 <style lang="scss" scoped>
