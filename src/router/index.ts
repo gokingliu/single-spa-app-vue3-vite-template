@@ -1,13 +1,13 @@
 import { RouteRecordRaw } from 'vue-router';
-import MANAGE_ROUTERS from './modules/manage';
+import ManageRouters from './modules/manage';
 
-const DEFAULT_ROUTERS: RouteRecordRaw[] = [
+const DefaultRouters: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'index',
     component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/index.vue'),
     redirect: () => ({ path: '/add' }),
-    children: [...MANAGE_ROUTERS],
+    children: [...ManageRouters],
   },
   {
     path: '/403/:authType',
@@ -16,4 +16,4 @@ const DEFAULT_ROUTERS: RouteRecordRaw[] = [
   },
 ];
 
-export default DEFAULT_ROUTERS;
+export default DefaultRouters;

@@ -2,7 +2,7 @@ import { ResponseUserAuth } from './store';
 
 export interface SingleSpaProps {
   name: string;
-  mountParcel: Function;
+  mountParcel: () => void;
   parcelProps: ParcelProps;
 }
 

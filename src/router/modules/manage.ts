@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 
-const MANAGE_ROUTERS: RouteRecordRaw[] = [
+const ManageRouters: RouteRecordRaw[] = [
   {
     path: '/add',
     component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/keep-views.vue'),
@@ -41,4 +41,4 @@ const MANAGE_ROUTERS: RouteRecordRaw[] = [
   },
 ];
 
-export default MANAGE_ROUTERS;
+export default ManageRouters;

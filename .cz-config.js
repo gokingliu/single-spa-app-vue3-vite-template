@@ -47,7 +47,7 @@ module.exports = {
     {
       value: ':construction_worker: ci',
       name: '👷 ci:       CI related changes',
-    }
+    },
   ],
   messages: {
     type: '请选择提交类型(必填)',
