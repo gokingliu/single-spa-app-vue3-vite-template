@@ -43,6 +43,7 @@ export default { name: 'NoPermission' };
   text-align: center;
 
   a {
+    font-size: 20px;
     cursor: pointer;
   }
 }
