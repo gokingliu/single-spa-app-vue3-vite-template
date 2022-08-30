@@ -10,8 +10,8 @@ import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineConfig({
+  // 打包静态文件配置
   build: {
-    // 打包静态文件配置
     rollupOptions: {
       preserveEntrySignatures: 'allow-extension',
       input: 'src/main.ts',

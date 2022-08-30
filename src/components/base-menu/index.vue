@@ -1,12 +1,5 @@
 <template>
-  <el-menu
-    :default-active="activeRoute"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b"
-    mode="horizontal"
-    @select="routeChange"
-  >
+  <el-menu :default-active="activeRoute" mode="horizontal" @select="routeChange">
     <el-menu-item index="add">添加</el-menu-item>
     <el-menu-item index="search">查询</el-menu-item>
   </el-menu>

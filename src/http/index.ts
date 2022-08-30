@@ -4,12 +4,9 @@ import { ElMessage } from 'element-plus';
 import { AxiosSourceCancelConfig, AxiosResponseConfig } from '@/types';
 
 class HttpClient {
-  // Axios 请求通用配置
-  commonOption;
-  // Axios 实例
-  axios;
-  // 取消请求
-  sourceCancel: AxiosSourceCancelConfig = { token: undefined, cancel: null };
+  commonOption; // Axios 请求通用配置
+  axios; // Axios 实例
+  sourceCancel: AxiosSourceCancelConfig = { token: undefined, cancel: null }; // 取消请求
 
   constructor(commonOption: any, options: any) {
     this.commonOption = commonOption;
