@@ -9,19 +9,26 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
-const pathSrc = path.resolve(__dirname, 'src');
-
 export default defineConfig({
-  resolve: {
-    alias: {
-      '@': pathSrc,
+  build: {
+    // 打包静态文件配置
+    rollupOptions: {
+      preserveEntrySignatures: 'allow-extension',
+      input: 'src/main.ts',
+      output: {
+        chunkFileNames: 'js/[name]-[hash].js',
+        entryFileNames: 'js/main.js',
+        assetFileNames: '[ext]/[name]-[hash].[ext]',
+        format: 'systemjs',
+      },
     },
   },
+  // 本地开发环境跨域处理
+  server: { headers: { 'Access-Control-Allow-Origin': '*' } },
+  resolve: { alias: { '@': path.resolve(__dirname, 'src') } },
   css: {
     preprocessorOptions: {
-      scss: {
-        additionalData: '@use "@/assets/css/element-variables.scss" as *;',
-      },
+      scss: { additionalData: '@use "@/assets/css/element-variables.scss" as *;' },
     },
   },
   plugins: [
@@ -50,9 +57,7 @@ export default defineConfig({
     VueJsx(),
     Checker({
       typescript: true,
-      eslint: {
-        lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
-      },
+      eslint: { lintCommand: 'eslint "./src/**/*.{ts,tsx}"' },
     }),
   ],
 });
