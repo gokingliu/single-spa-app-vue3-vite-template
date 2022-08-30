@@ -54,6 +54,7 @@ const singleSpaMode = () => {
     createApp,
     appOptions: {
       render: () => h(App, {}),
+      el: '#app-viewport',
     },
     handleInstance: (app: Application, props: SingleSpaProps) => {
       // 储存权限信息到 vuex
