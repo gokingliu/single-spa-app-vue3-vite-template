@@ -22,7 +22,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@gokingliu/eslint-config": "^1.0.2",
+    "@gokingliu/eslint-config": "^1.0.3",
     "@iconify-json/ep": "^1.1.7",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@vitejs/plugin-vue": "^3.0.1",

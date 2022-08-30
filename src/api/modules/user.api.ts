@@ -13,7 +13,7 @@ const User = {
   /**
    * @description demo (其他 api 域名请求)
    */
-  queryOtherApi(data: RequestUserAuth): Promise<AxiosResponseConfig<ResponseUserAuth>> {
+  postOtherApi(data: RequestUserAuth): Promise<AxiosResponseConfig<ResponseUserAuth>> {
     return http.post('/api2', data, { baseURL: baseEnv.otherApi, withCredentials: false });
   },
 };

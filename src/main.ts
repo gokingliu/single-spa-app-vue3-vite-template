@@ -2,7 +2,7 @@ import { createApp, h, App as Application } from 'vue';
 import { createRouter, createWebHashHistory, Router, RouterOptions } from 'vue-router';
 import { ResponseUserAuth, SingleSpaProps } from '@/types';
 import App from './App.vue';
-import singleSpaVue from 'single-spa-vue';
+import singleSpaVue, { SingleSpaVueLifecycles } from 'single-spa-vue';
 import api from '@/api';
 import routes from '@/router';
 import routerGuards from '@/router/routerGuards';
@@ -11,7 +11,7 @@ import 'element-plus/theme-chalk/src/message.scss';
 
 // 路由配置
 const routerOptions: RouterOptions = {
-  history: createWebHashHistory(''),
+  history: createWebHashHistory('single-spa-app-vue3-vite-template'),
   routes,
 };
 // 创建路由
@@ -25,7 +25,6 @@ const standaloneMode = async () => {
   const setUserAuth = (userAuth: ResponseUserAuth | null | undefined) => {
     // 储存权限信息到 vuex
     store.commit('userStore/SET_USER_AUTH', userAuth);
-
     // 路由守卫
     router.beforeEach((to, from, next) => {
       routerGuards.beforeEach(to, from, next, userAuth);
@@ -36,6 +35,8 @@ const standaloneMode = async () => {
     const response = await api.queryUserAuth();
     setUserAuth(response.result);
   } catch (e) {
+    // TODO 应返回 null，这里因为是假接口，所以返回了一个 demo 数据
+    // setUserAuth(null);
     setUserAuth({ addAuth: true, searchAuth: false });
   }
   // 全局插件注册
@@ -45,8 +46,11 @@ const standaloneMode = async () => {
 };
 
 // 微前端启动
+export const bootstrap: ((() => Promise<unknown>) | any)[] = [];
+export const mount: ((() => Promise<unknown>) | any)[] = [];
+export const unmount: ((() => Promise<unknown>) | any)[] = [];
 const singleSpaMode = () => {
-  singleSpaVue({
+  const vueLifecycles: SingleSpaVueLifecycles = singleSpaVue({
     createApp,
     appOptions: {
       render: () => h(App, {}),
@@ -62,6 +66,27 @@ const singleSpaMode = () => {
       [store, router].map((item) => app.use(item));
     },
   });
+  bootstrap.push(
+    () =>
+      new Promise((resolve) => {
+        resolve(null);
+      }),
+    vueLifecycles.bootstrap,
+  );
+  mount.push(
+    () =>
+      new Promise((resolve) => {
+        resolve(null);
+      }),
+    vueLifecycles.mount,
+  );
+  unmount.push(
+    () =>
+      new Promise((resolve) => {
+        resolve(null);
+      }),
+    vueLifecycles.unmount,
+  );
 };
 
 // webpack 运行或 vite 运行

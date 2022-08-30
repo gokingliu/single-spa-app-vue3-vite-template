@@ -19,6 +19,8 @@ module.exports = {
     },
   },
   configureWebpack: (config) => {
+    // 本地开发环境跨域处理
+    config.devServer = { headers: { 'Access-Control-Allow-Origin': '*' } };
     // 按需加载 ElementPlus 组件和样式
     config.plugins.push(
       AutoImport({
@@ -56,7 +58,7 @@ module.exports = {
       );
     }
     if (process.env.VUE_APP_ENV !== 'standalone') {
-      config.output.libraryTarget = 'umd';
+      config.output.libraryTarget = 'system';
       config.plugins.push(new SystemJSPublicPathWebpackPlugin({ rootDirectoryLevel: 2, systemjsModuleName: name }));
       config.plugins.push(new StandaloneSingleSpaPlugin({ appOrParcelName: name, disabled: true }));
     }
